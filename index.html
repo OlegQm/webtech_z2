@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezervácia športovej akcie</title>
+    <link rel="stylesheet" href="files/css/index-styles.css">
+</head>
+
+<body>
+    <form id="reservationForm" action="#" method="post">
+        <div class="form-container back-box">
+            <div class="left-column back-box">
+                <fieldset id="personal-info" class="info">
+                    <legend>Osobné údaje</legend>
+                    <label for="name" class="required">Meno</label>
+                    <input class="input-field" type="text" id="name" name="name" required>
+
+                    <label for="surname" class="required">Priezvisko</label>
+                    <input class="input-field" type="text" id="surname" name="surname" required>
+
+                    <label for="gender" class="required">Pohlavie</label>
+                    <select class="input-field" id="gender" name="gender" required>
+                        <option value="M">Muž</option>
+                        <option value="F">Žena</option>
+                    </select>
+
+                    <label for="dob" class="required">Dátum narodenia</label>
+                    <input class="input-field" type="date" id="dob" name="dob" required>
+                    <p id="age"></p>
+                </fieldset>
+                <fieldset class="info">
+                    <legend>Registrácia</legend>
+                    <label for="sport" class="required">Typ športovej akcie</label>
+                    <select id="sport" name="sport" class="input-field" required>
+                        <option value="">Vyber šport</option>
+                        <option value="futbal">Futbal</option>
+                        <option value="tenis">Tenis</option>
+                    </select>
+
+                    <label for="subSport" class="required">Podkategória</label>
+                    <select id="subSport" name="subSport" class="input-field" required>
+                    </select>
+
+                    <label for="email" class="required">E-mail</label>
+                    <input type="email" id="email" class="input-field" name="email" pattern=".+@.+\..{2,4}" required>
+                </fieldset>
+            </div>
+
+            <div class="right-column back-box">
+                <label for="paymentOption">Platba na faktúru?</label>
+                <input type="radio" name="payment" value="yes" id="paymentYes"> Áno
+                <input type="radio" name="payment" value="no" id="paymentNo"> Nie
+
+                <div id="paymentDetails" class="hidden">
+                    <label for="billingDetails">Fakturačné údaje</label>
+                    <textarea id="billingDetails" name="billingDetails"></textarea>
+                </div>
+
+                <label for="sports">Zvoľte športy</label>
+                <input type="checkbox" name="sports" value="futbal"> Futbal
+                <input type="checkbox" name="sports" value="tenis"> Tenis
+                <input type="checkbox" name="sports" value="hádzaná"> Hádzaná
+                <input type="checkbox" name="sports" value="iné"> Iné
+
+                <label for="comments">Poznámky</label>
+                <textarea class="input-field" id="comments" name="comments"></textarea>
+
+                <label for="phone" class="required">Telefónne číslo</label>
+                <input class="input-field" type="tel" id="phone" name="phone" pattern="[+][0-9]{2}[0-9]{9}" required>
+
+                <input type="submit" value="Odoslať">
+            </div>
+        </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+
+</html>
