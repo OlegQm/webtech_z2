@@ -11,7 +11,7 @@
 <body>
     <form id="reservationForm" action="#" method="post">
         <div class="form-container back-box">
-            <div class="left-column back-box">
+            <div class="back-box left-column">
                 <fieldset id="personal-info" class="info">
                     <legend>Osobné údaje</legend>
                     <label for="name" class="required">Meno</label>
@@ -20,61 +20,97 @@
                     <label for="surname" class="required">Priezvisko</label>
                     <input class="input-field" type="text" id="surname" name="surname" required>
 
+                    <label for="dob" class="required">Dátum narodenia</label>
+                    <input class="input-field" type="date" id="dob" name="dob" required>
+
+                    <label for="age" class="required">Vek (rokov)</label>
+                    <input class="input-field" type="text" id="age" name="age" required>
+                    
                     <label for="gender" class="required">Pohlavie</label>
                     <select class="input-field" id="gender" name="gender" required>
                         <option value="M">Muž</option>
                         <option value="F">Žena</option>
                     </select>
-
-                    <label for="dob" class="required">Dátum narodenia</label>
-                    <input class="input-field" type="date" id="dob" name="dob" required>
-                    <p id="age"></p>
                 </fieldset>
+                
                 <fieldset class="info">
                     <legend>Registrácia</legend>
+
+                    <label for="quantity" class="required">Zadajte počet ľudí</label>
+                    <input type="number" id="quantity" name="quantity" min="2" max="10" step="2" value="2">
+
                     <label for="sport" class="required">Typ športovej akcie</label>
                     <select id="sport" name="sport" class="input-field" required>
-                        <option value="">Vyber šport</option>
+                        <option value="">Vyberte šport</option>
                         <option value="futbal">Futbal</option>
                         <option value="tenis">Tenis</option>
                     </select>
 
                     <label for="subSport" class="required">Podkategória</label>
-                    <select id="subSport" name="subSport" class="input-field" required>
-                    </select>
+                    <select id="subSport" name="subSport" class="input-field" required></select>
 
-                    <label for="email" class="required">E-mail</label>
-                    <input type="email" id="email" class="input-field" name="email" pattern=".+@.+\..{2,4}" required>
+                    <label for="sportPlace" class="required">Miesto</label>
+                    <select id="sportPlace" name="sportPlace" class="input-field" required></select>
+
+                    <label for="timeAndPrice" class="required">Cena a čas</label>
+                    <select id="timeAndPrice" name="timeAndPrice" class="input-field" required></select>
                 </fieldset>
             </div>
 
             <div class="right-column back-box">
-                <label for="paymentOption">Platba na faktúru?</label>
-                <input type="radio" name="payment" value="yes" id="paymentYes"> Áno
-                <input type="radio" name="payment" value="no" id="paymentNo"> Nie
+                <fieldset class="info">
+                    <legend>Platba a iné</legend>
+                    <fieldset class="radio-group custom-snd-page-container">
+                        <legend for="paymentOption">Platba na faktúru?</legend>
+                        <label class="custom-radiobtn-checkbox">
+                            <input class="radio-mark" type="radio" name="payment" value="yes" id="paymentYes">
+                            <span for="paymentYes">Áno</span>
+                        </label>
+                        <label class="custom-radiobtn-checkbox">
+                            <input class="radio-mark" type="radio" name="payment" value="no" id="paymentNo">
+                            <span for="paymentNo">Nie</span>
+                        </label>    
+                    </fieldset>
 
-                <div id="paymentDetails" class="hidden">
-                    <label for="billingDetails">Fakturačné údaje</label>
-                    <textarea id="billingDetails" name="billingDetails"></textarea>
-                </div>
+                    <fieldset class="checkbox-group custom-snd-page-container">
+                        <legend for="sports">Ďalšie športové potreby</legend>
+                        <label class="custom-radiobtn-checkbox">
+                            <input type="checkbox" name="sports" id="shoes">
+                            <span class="checkbox-mark"></span>Tenisky
+                        </label>
+                        <label class="custom-radiobtn-checkbox">
+                            <input type="checkbox" name="sports" id="t-shirt">
+                            <span class="checkbox-mark"></span>Tričko
+                        </label>
+                        <label class="custom-radiobtn-checkbox">
+                            <input type="checkbox" name="sports" id="beer">
+                            <span class="checkbox-mark"></span>Pivo
+                        </label>
+                        <label class="custom-radiobtn-checkbox">
+                            <input type="checkbox" name="sports" id="other" onclick="handleOther()">
+                            <span class="checkbox-mark"></span>Iné
+                        </label>
+                        <textarea name="other" id="other-textarea"></textarea>
+                    </fieldset>
+                    
+                    <fieldset class="custom-snd-page-container">
+                        <legend for="comments">Poznámky</legend>
+                        <label>
+                            <textarea id="comments" name="comments"></textarea>
+                        </label>
+                    </fieldset>
 
-                <label for="sports">Zvoľte športy</label>
-                <input type="checkbox" name="sports" value="futbal"> Futbal
-                <input type="checkbox" name="sports" value="tenis"> Tenis
-                <input type="checkbox" name="sports" value="hádzaná"> Hádzaná
-                <input type="checkbox" name="sports" value="iné"> Iné
+                    <fieldset class="custom-snd-page-container">
+                        <legend for="phone" class="required">Telefónne číslo</legend>
+                        <input class="input-field" type="tel" id="phone" name="phone" pattern="[+][0-9]{2}[0-9]{9}" required>
+                    </fieldset>
 
-                <label for="comments">Poznámky</label>
-                <textarea class="input-field" id="comments" name="comments"></textarea>
-
-                <label for="phone" class="required">Telefónne číslo</label>
-                <input class="input-field" type="tel" id="phone" name="phone" pattern="[+][0-9]{2}[0-9]{9}" required>
-
-                <input type="submit" value="Odoslať">
+                    <input type="submit" value="Odoslať">
+                </fieldset>
             </div>
         </div>
     </form>
-    <script src="script.js"></script>
+    <script src="files/js/form.js"></script>
 </body>
 
 </html>
