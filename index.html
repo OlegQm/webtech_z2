@@ -63,13 +63,23 @@
                     <fieldset class="radio-group custom-snd-page-container">
                         <legend for="paymentOption">Platba na faktúru?</legend>
                         <label class="custom-radiobtn-checkbox">
-                            <input class="radio-mark" type="radio" name="payment" value="yes" id="paymentYes">
+                            <input class="radio-mark" type="radio" name="payment" value="yes" id="paymentYes" onclick="handleFacturePayment()">
                             <span for="paymentYes">Áno</span>
                         </label>
                         <label class="custom-radiobtn-checkbox">
-                            <input class="radio-mark" type="radio" name="payment" value="no" id="paymentNo">
+                            <input class="radio-mark" type="radio" name="payment" value="no" id="paymentNo" onclick="handleFacturePayment()">
                             <span for="paymentNo">Nie</span>
-                        </label>    
+                        </label>
+                        <div id="visibility-container" class="hidden-content">
+                            <label for="company-name" class="required">Názov spoločnosti</label>
+                            <input class="input-field" type="text" id="company-name" name="company-name" required>
+
+                            <label for="ico" class="required">IČO</label>
+                            <input class="input-field" type="text" id="ico" name="ico" required>
+        
+                            <label for="dic" class="required">DIČ</label>
+                            <input class="input-field" type="text" id="dic" name="dic" required>
+                        </div>
                     </fieldset>
 
                     <fieldset class="checkbox-group custom-snd-page-container">
@@ -90,7 +100,7 @@
                             <input type="checkbox" name="sports" id="other" onclick="handleOther()">
                             <span class="checkbox-mark"></span>Iné
                         </label>
-                        <textarea name="other" id="other-textarea"></textarea>
+                        <textarea name="other" id="other-textarea" class="hidden-content"></textarea>
                     </fieldset>
                     
                     <fieldset class="custom-snd-page-container">

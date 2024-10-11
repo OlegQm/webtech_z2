@@ -7,6 +7,8 @@ const inputAgeElement = document.getElementById('age');
 const peopleCounterElement = document.getElementById('quantity');
 const otherCheckbox = document.getElementById('other');
 const otherInput = document.getElementById('other-textarea');
+const paymentInput = document.getElementById('paymentYes');
+const paymentInputVisibContainer = document.getElementById('visibility-container');
 
 function addSelectElements(selectElement, options) {
     options.forEach(function(option) {
@@ -155,5 +157,14 @@ function handleOther() {
         return;
     } else {
         otherInput.style.display = "none";
+    }
+}
+
+function handleFacturePayment() {
+    if (paymentInput.checked) {
+        paymentInputVisibContainer.style.display = "block";
+        return;
+    } else {
+        paymentInputVisibContainer.style.display = "none";
     }
 }

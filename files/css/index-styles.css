@@ -197,8 +197,12 @@ body {
     color: #333;
 }
 
-#other-textarea {
+.hidden-content {
     display: none;
+}
+
+#visibility-container {
+    margin: 0.8rem;
 }
 
 @media (max-width: 768px) {
