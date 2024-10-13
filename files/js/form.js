@@ -14,6 +14,15 @@ const countryCodeElement= document.getElementById('country-code');
 const phoneNumberElement= document.getElementById('phone-number');
 const blockedFieldElement= document.getElementById('blocked-field');
 const creatorsButtonElement= document.getElementById('creators-button');
+const nameInput = document.getElementById('name');
+const nameCharCount = document.getElementById('name-char-count');
+const surnameInput = document.getElementById('surname');
+const surnameCharCount = document.getElementById('surname-char-count');
+const ageCharCount = document.getElementById('age-char-count');
+const tentsInput = document.getElementById('comments');
+const tentsCharCount = document.getElementById('tents-char-count');
+const phoneCharCount = document.getElementById('phone-char-count');
+const emailCharCount = document.getElementById('email-char-count');
 
 function addSelectElements(selectElement, options) {
     options.forEach(function(option) {
@@ -257,3 +266,45 @@ function handleCreatorsName() {
         blockedFieldElement.style.display = "none";
     }
 }
+
+function charsCounter(element, charCountElement) {
+    const maxLength = element.getAttribute('maxlength');
+    const currentLength = element.value.length;
+    charCountElement.textContent = `${maxLength - currentLength}/${maxLength}`;
+}
+
+nameInput.addEventListener('input',
+    function() {
+        charsCounter(nameInput, nameCharCount);
+    }
+);
+
+surnameInput.addEventListener('input',
+    function() {
+        charsCounter(surnameInput, surnameCharCount);
+    }
+);
+
+inputAgeElement.addEventListener('input',
+    function() {
+        charsCounter(inputAgeElement, ageCharCount);
+    }
+);
+
+tentsInput.addEventListener('input',
+    function() {
+        charsCounter(tentsInput, tentsCharCount);
+    }
+);
+
+phoneNumberElement.addEventListener('input',
+    function() {
+        charsCounter(phoneNumberElement, phoneCharCount);
+    }
+);
+
+emailElement.addEventListener('input',
+    function() {
+        charsCounter(emailElement, emailCharCount);
+    }
+);

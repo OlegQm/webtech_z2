@@ -14,17 +14,26 @@
             <div class="back-box left-column">
                 <fieldset id="personal-info" class="info">
                     <legend>Osobné údaje</legend>
-                    <label for="name" class="required">Meno</label>
-                    <input class="input-field" type="text" id="name" name="name" required>
+                    <div class="input-container">
+                        <label for="name" class="required">Meno</label>
+                        <input class="input-field" type="text" id="name" name="name" maxlength="30" required>
+                        <span id="name-char-count" class="char-counter">30/30</span>
+                    </div>
 
-                    <label for="surname" class="required">Priezvisko</label>
-                    <input class="input-field" type="text" id="surname" name="surname" required>
-
+                    <div class="input-container">
+                        <label for="surname" class="required">Priezvisko</label>
+                        <input class="input-field" type="text" id="surname" name="surname" maxlength="30" required>
+                        <span id="surname-char-count" class="char-counter">30/30</span>
+                    </div>
+                    
                     <label for="dob" class="required">Dátum narodenia</label>
-                    <input class="input-field" type="date" id="dob" name="dob" required>
+                    <input type="date" id="dob" name="dob" required>
 
-                    <label for="age" class="required">Vek (rokov)</label>
-                    <input class="input-field" type="text" id="age" name="age" required>
+                    <div class="input-container">
+                        <label for="age" class="required">Vek (rokov)</label>
+                        <input class="input-field" type="text" id="age" name="age" maxlength="3" required>
+                        <span id="age-char-count" class="char-counter">3/3</span>
+                    </div>
                     
                     <label for="gender" class="required">Pohlavie</label>
                     <select class="input-field" id="gender" name="gender" required>
@@ -35,7 +44,7 @@
                 
                 <fieldset class="info">
                     <legend>Registrácia</legend>
-
+                    
                     <label for="quantity" class="required">Zadajte počet ľudí</label>
                     <input type="number" id="quantity" name="quantity" min="2" max="10" step="2" value="2">
 
@@ -58,7 +67,7 @@
 
                 <fieldset  class="info">
                     <legend>Tvorca</legend>
-                    <button id="creators-button" class="styled-button" onclick="handleCreatorsName()">Zobraziť meno gladiátora</button>
+                    <button type="button" id="creators-button" class="styled-button" onclick="handleCreatorsName()">Zobraziť meno gladiátora</button>
 
                     <input class="input-field" type="text" id="blocked-field" value="Oleh Savchenko" disabled>
                 </fieldset>
@@ -112,9 +121,12 @@
                     
                     <fieldset class="custom-snd-page-container">
                         <legend for="comments">Poznámky</legend>
-                        <label>
-                            <textarea id="comments" name="comments"></textarea>
-                        </label>
+                        <div class="input-container">
+                            <label>
+                                <textarea class="input-field" maxlength="500" id="comments" name="comments"></textarea>
+                                <span id="tents-char-count" class="char-counter">500/500</span>
+                            </label>
+                        </div>
                     </fieldset>
 
                     <fieldset class="custom-snd-page-container">
@@ -127,13 +139,18 @@
                                 <option value="+380">+380 Ukrajina</option>
                                 <option value="+41">+41 Švajčiarsko</option>
                             </select>
-
-                            <label for="phone-number" class="required">Telefónne číslo</label>
-                            <input class="input-field" type="text" id="phone-number" name="phone-number" placeholder="Zadajte číslo" required>
+                            <div class="input-container">
+                                <label for="phone-number" class="required" required>Telefónne číslo</label>
+                                <input class="input-field required" type="text" id="phone-number" maxlength="15" name="phone-number" placeholder="Zadajte číslo">
+                                <span id="phone-char-count" class="char-counter">15/15</span>
+                            </div>
                         </form>
-
-                        <label for="email" class="required">Email</label>
-                        <input class="input-field" type="email" id="email" name="email" required>
+                        
+                        <div class="input-container">
+                            <label for="email" class="required">Email</label>
+                            <input class="input-field" type="email" id="email" name="email" maxlength="256" required>
+                            <span id="email-char-count" class="char-counter">256/256</span>
+                        </div>
                     </fieldset>
 
                     <input type="submit" value="Odoslať">

@@ -234,6 +234,38 @@ body {
     display: none;
 }
 
+.input-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.input-field {
+    width: 100%;
+    padding-right: 3rem;
+    box-sizing: border-box;
+}
+
+.char-counter, #tents-char-count {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+#tents-char-count {
+    top: -0.5rem;
+}
+
+.char-counter {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
 @media (max-width: 768px) {
     .form-container {
         flex-direction: column;
