@@ -83,18 +83,25 @@
                             <span for="paymentYes">Áno</span>
                         </label>
                         <label class="custom-radiobtn-checkbox">
-                            <input class="radio-mark" type="radio" name="payment" value="no" id="paymentNo" onclick="handleFacturePayment()">
+                            <input class="radio-mark" type="radio" name="payment" value="no" id="paymentNo" onclick="handleFacturePayment()" checked>
                             <span for="paymentNo">Nie</span>
                         </label>
-                        <div id="visibility-container" class="hidden-content">
-                            <label for="company-name" class="required">Názov spoločnosti</label>
-                            <input class="input-field" type="text" id="company-name" name="company-name" required>
-
-                            <label for="ico" class="required">IČO</label>
-                            <input class="input-field" type="text" id="ico" name="ico" required>
-        
-                            <label for="dic" class="required">DIČ</label>
-                            <input class="input-field" type="text" id="dic" name="dic" required>
+                        <div id="visibility-container" class="hidden-content">                            
+                            <div class="input-container">
+                                <label for="company-name" class="required">Názov spoločnosti</label>
+                                <input class="input-field" type="text" id="company-name" name="company-name" maxlength="128" required>
+                                <span id="company-name-char-count" class="high-position-counter">128/128</span>
+                            </div>
+                            <div class="input-container">
+                                <label for="ico" class="required">IČO</label>
+                                <input class="input-field" type="text" id="ico" name="ico" maxlength="8" required>
+                                <span id="ico-char-count" class="high-position-counter">8/8</span>
+                            </div>
+                            <div class="input-container">
+                                <label for="dic" class="required">DIČ</label>
+                                <input class="input-field" type="text" id="dic" name="dic" maxlength="10" required>
+                                <span id="dic-char-count" class="high-position-counter">10/10</span>
+                            </div>
                         </div>
                     </fieldset>
 
@@ -153,11 +160,21 @@
                         </div>
                     </fieldset>
 
-                    <input type="submit" value="Odoslať">
+                    <input type="submit" value="Náhľad">
                 </fieldset>
             </div>
         </div>
     </form>
+
+    <div id="orderPreviewModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalButton">&times;</span>
+            <h2>Náhľad objednávky</h2>
+            <div id="orderDetails"></div>
+            <button type="submit" id="finalSubmitButton" class="styled-button">Odoslať</button>
+        </div>
+    </div>
+
     <script src="files/js/form.js"></script>
 </body>
 
