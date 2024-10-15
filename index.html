@@ -88,9 +88,9 @@
                         </label>
                         <div id="visibility-container" class="hidden-content">                            
                             <div class="input-container">
-                                <label for="company-name" class="required">Názov spoločnosti</label>
-                                <input class="input-field" type="text" id="company-name" name="company-name" maxlength="128" required>
-                                <span id="company-name-char-count" class="high-position-counter">128/128</span>
+                                <label for="company-name" class="required">Firma</label>
+                                <input class="input-field" type="text" id="company-name" name="company-name" maxlength="64" required>
+                                <span id="company-name-char-count" class="high-position-counter">64/64</span>
                             </div>
                             <div class="input-container">
                                 <label for="ico" class="required">IČO</label>
@@ -147,7 +147,7 @@
                                 <option value="+41">+41 Švajčiarsko</option>
                             </select>
                             <div class="input-container">
-                                <label for="phone-number" class="required" required>Telefónne číslo</label>
+                                <label for="phone-number" class="required">Telefónne číslo</label>
                                 <input class="input-field required" type="text" id="phone-number" maxlength="15" name="phone-number" placeholder="Zadajte číslo">
                                 <span id="phone-char-count" class="char-counter">15/15</span>
                             </div>
@@ -155,7 +155,7 @@
                         
                         <div class="input-container">
                             <label for="email" class="required">Email</label>
-                            <input class="input-field" type="email" id="email" name="email" maxlength="256" required>
+                            <input class="input-field" type="email" id="email" name="email" maxlength="256">
                             <span id="email-char-count" class="char-counter">256/256</span>
                         </div>
                     </fieldset>
@@ -169,8 +169,12 @@
     <div id="orderPreviewModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button" id="closeModalButton">&times;</span>
-            <h2>Náhľad objednávky</h2>
-            <div id="orderDetails"></div>
+            <h2 id="previewHeader">Náhľad objednávky</h2>
+            <div class="preview-columns">
+                <div id="left-column-content"></div>
+                <div class="divider"></div>
+                <div id="right-column-content"></div>
+            </div>
             <button type="submit" id="finalSubmitButton" class="styled-button">Odoslať</button>
         </div>
     </div>

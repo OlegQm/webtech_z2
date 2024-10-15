@@ -34,7 +34,8 @@ const modal = document.getElementById('orderPreviewModal');
 const closeModalButton = document.getElementById('closeModalButton');
 const finalSubmitButton = document.getElementById('finalSubmitButton');
 const previewButton = document.querySelector('#reservationForm input[type="submit"]');
-const orderDetails = document.getElementById('orderDetails');
+const previewLeftColumnContent = document.getElementById('left-column-content');
+const previewRightColumnContent = document.getElementById('right-column-content');
 
 function checkNotEmptyElement(element) {
     if (!element.value) {
@@ -233,9 +234,10 @@ previewButton.addEventListener('click', function (event) {
         <p><strong>Poznámky:</strong> ${tentsInput.value}</p>\n
     `
 
-    let previewContent = personalData + registration +
-        facturePayment + otherSportNeeds + contactInfo + notes;
-    orderDetails.innerHTML = previewContent;
+    const leftPreviewContent = personalData + registration + facturePayment;
+    const rightPreviewContent = otherSportNeeds + contactInfo + notes;
+    previewLeftColumnContent.innerHTML = leftPreviewContent;
+    previewRightColumnContent.innerHTML = rightPreviewContent;
 
     modal.style.display = 'flex';
 });
