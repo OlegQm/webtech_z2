@@ -45,6 +45,7 @@ function checkNotEmptyElement(element) {
 }
 
 function checkName(namePart) {
+    console.log(namePart);
     setNormalValidity(namePart);
     if (!checkNotEmptyElement(namePart)) {
         return false;
@@ -64,11 +65,11 @@ function checkPersonalInfo() {
     const isNameValid = checkName(nameInput);
     const isSurnameValid = checkName(surnameInput);
     const isBirthDateAndAgeValid = checkDateAndAge(dobElement, inputAgeElement);
-    return isNameValid && isSurnameValid && isBirthDateAndAgeValid; 
+    return isNameValid && isSurnameValid && isBirthDateAndAgeValid;
 }
 
 function checkSelected(selectItem, message) {
-    setNormalValidity(namePart);
+    setNormalValidity(selectItem);
     if (!selectItem.value) {
         showAlert(selectItem, null, message);
         return false;
@@ -124,7 +125,8 @@ function checkDIC(element) {
 }
 
 function checkPaymentAndOther() {
-    let isCompanyNameValid, isICOValid, isDICValid, isOtherValid = true;
+    let isCompanyNameValid = true, isICOValid = true,
+        isDICValid = true, isOtherValid = true;
     if (paymentInput.checked) {
         isCompanyNameValid = checkNotEmptyElement(companyNameElement);
         isICOValid = checkICO(icoElement);
@@ -136,7 +138,7 @@ function checkPaymentAndOther() {
         }
     }
     const isPhoneValid = isValidPhoneNumber(phoneNumberElement.value);
-    const isEmailValid = isValidEmail(emailElement);
+    const [isEmailValid, _] = isValidEmail(emailElement);
     return (
         isCompanyNameValid
         && isICOValid
@@ -151,6 +153,9 @@ function checkForm() {
     const isPersonalInfoValid = checkPersonalInfo();
     const isRegistrationValid = checkRegistration();
     const isPaymentAndOtherValid = checkPaymentAndOther();
+    console.log(isPersonalInfoValid);
+    console.log(isRegistrationValid);
+    console.log(isPaymentAndOtherValid);
     return (
         isPersonalInfoValid
         && isRegistrationValid
@@ -212,10 +217,13 @@ function showAlert(element, secondElement=null, message) {
 }
 
 function setNormalValidity(element, secondElement=null) {
+    if (element == null) {
+        return;
+    }
     element.setCustomValidity('');
     const validStyle = "0.15rem solid green";
     element.style.border = validStyle;
-    if (secondElement == null)
+    if (secondElement != null)
         secondElement.style.border = validStyle;
 }
 
@@ -366,6 +374,7 @@ function isValidEmail(emailElement) {
     }
     const email = emailElement.value;
     const atSymbolIndex = email.indexOf('@');
+    let reason = "";
     if (atSymbolIndex < 3) {
         reason = "Znak @ chýba alebo je na začiatku emailu.\n";
         return [false, reason];
@@ -408,13 +417,13 @@ function isValidPhoneNumber(phoneNumber) {
     setNormalValidity(phoneNumberElement);
     if (phoneNumber === '') {
         showAlert(phoneNumberElement, null, 'Zadajte telefónne číslo.');
-        return;
+        return false;
     }
     const countryCode = extractCountryCode(countryCodeElement.value);
     const containsIncorrectChars = /[^\d\s]/.test(phoneNumber);
     if (containsIncorrectChars) {
         showAlert(phoneNumberElement, null, 'Telefónne číslo musí mať format 123 456 789.');
-        return;
+        return false;
     }
     const numbersLengths = {
         '421': 9,
@@ -429,8 +438,9 @@ function isValidPhoneNumber(phoneNumber) {
     }
     if (number.length !== currentNumberLength) {
         showAlert(phoneNumberElement, null, 'Telefónne číslo musí mať format 123 456 789.');
+        return false;
     }
-    return;
+    return true;
 }
 
 phoneNumberElement.addEventListener('change', function() {
