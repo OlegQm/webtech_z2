@@ -45,7 +45,6 @@ function checkNotEmptyElement(element) {
 }
 
 function checkName(namePart) {
-    console.log(namePart);
     setNormalValidity(namePart);
     if (!checkNotEmptyElement(namePart)) {
         return false;
@@ -70,7 +69,7 @@ function checkPersonalInfo() {
 
 function checkSelected(selectItem, message) {
     setNormalValidity(selectItem);
-    if (!selectItem.value) {
+    if (!selectItem.value || selectItem.value.includes("Vyberte")) {
         showAlert(selectItem, null, message);
         return false;
     }
@@ -124,6 +123,39 @@ function checkDIC(element) {
     return true;
 }
 
+function getPaymentAttributes() {
+    let factPayment = "";
+    if (paymentInput.checked) {
+        factPayment = `
+            <p><strong>Názov spoločnosti:</strong> ${companyNameElement.value}</p>
+            <p><strong>IČO:</strong> ${icoElement.value}</p>
+            <p><strong>DIČ:</strong> ${dicElement.value}</p>\n
+        `;
+    }
+    return factPayment;
+}
+
+function getSportNeedsAttribudes() {
+    const shoesCheckbox = document.getElementById('shoes');
+    const tshirtCheckbox = document.getElementById('t-shirt');
+    const beerCheckbox = document.getElementById('beer');
+    let sportNeeds = "<p><strong>Športové potreby:</strong></p>\n<ul>";
+    if (shoesCheckbox.checked) {
+        sportNeeds += "<li>Tenisky</li>\n";
+    }
+    if (tshirtCheckbox.checked) {
+        sportNeeds += "<li>Tričko</li>\n";
+    }
+    if (beerCheckbox.checked) {
+        sportNeeds += "<li>Pivo</li>\n";
+    }
+    if (otherCheckbox.checked) {
+        sportNeeds += `<li>${otherInput.value}</li>\n`;
+    }
+    sportNeeds += "</ul>\n";
+    return sportNeeds;
+}
+
 function checkPaymentAndOther() {
     let isCompanyNameValid = true, isICOValid = true,
         isDICValid = true, isOtherValid = true;
@@ -153,9 +185,6 @@ function checkForm() {
     const isPersonalInfoValid = checkPersonalInfo();
     const isRegistrationValid = checkRegistration();
     const isPaymentAndOtherValid = checkPaymentAndOther();
-    console.log(isPersonalInfoValid);
-    console.log(isRegistrationValid);
-    console.log(isPaymentAndOtherValid);
     return (
         isPersonalInfoValid
         && isRegistrationValid
@@ -172,18 +201,40 @@ previewButton.addEventListener('click', function (event) {
     const name = nameInput.value;
     const surname = surnameInput.value;
     const sport = sportSelect.value;
+    const birthDate = dobElement.value;
     const subSport = subSportSelect.value;
     const place = sportPlaceSelect.value;
     const timeAndPrice = sportTimesAndPrices.value;
     const totalPeople = peopleCounterElement.value;
+    const ageInYears = inputAgeElement.value;
+    const gender = document.getElementById('gender').value;
 
-    let previewContent = `
-        <p><strong>Meno:</strong> ${name} ${surname}</p>
+    const personalData = `
+        <p><strong>Meno a priezvisko:</strong> ${name} ${surname}</p>
+        <p><strong>Dátum narodenia:</strong> ${birthDate}</p>
+        <p><strong>Vek:</strong> ${ageInYears}</p>
+        <p><strong>Pohlavie:</strong> ${gender}</p>\n
+    `
+
+    const registration = `
+        <p><strong>Počet ľudí:</strong> ${totalPeople}</p>
         <p><strong>Šport:</strong> ${sport} (${subSport})</p>
         <p><strong>Miesto:</strong> ${place}</p>
-        <p><strong>Čas a cena:</strong> ${timeAndPrice}</p>
-        <p><strong>Počet ľudí:</strong> ${totalPeople}</p>
-    `;
+        <p><strong>Čas a cena:</strong> ${timeAndPrice}</p>\n
+    `
+
+    const facturePayment = getPaymentAttributes();
+    const otherSportNeeds = getSportNeedsAttribudes();
+    const contactInfo = `
+        <p><strong>Telefónne číslo:</strong> ${phoneNumberElement.value}</p>
+        <p><strong>Email:</strong> ${emailElement.value}</p>\n
+    `
+    const notes = `
+        <p><strong>Poznámky:</strong> ${tentsInput.value}</p>\n
+    `
+
+    let previewContent = personalData + registration +
+        facturePayment + otherSportNeeds + contactInfo + notes;
     orderDetails.innerHTML = previewContent;
 
     modal.style.display = 'flex';
@@ -282,6 +333,7 @@ sportSelect.addEventListener('change', function() {
     
     subSportSelect.innerHTML = '';
     sportPlaceSelect.innerHTML = '';
+    sportTimesAndPrices.innerHTML = '';
 
     const options = subSports[this.value];
     addSelectElements(subSportSelect, options);
@@ -301,19 +353,6 @@ subSportSelect.addEventListener('change', function() {
     const options = places[this.value];
     addSelectElements(sportPlaceSelect, options);
 });
-
-function createTimesAndPrices(times, prices) {
-    const result = {};
-    const peopleCount = parseInt(peopleCounterElement.value);
-    for (const place in times) {
-        result[place] = ['Vyberte cenu a čas', ...times[place].map(time => {
-            const [hours] = time.split(':');
-            const price = prices[place] + parseInt(hours) + peopleCount;
-            return `${time} - ${price} eur`;
-        })];
-    }
-    return result;
-}
 
 sportPlaceSelect.addEventListener('change', function() {
     const times = {
@@ -335,6 +374,19 @@ sportPlaceSelect.addEventListener('change', function() {
     options = timesAndPrices[this.value];
     addSelectElements(sportTimesAndPrices, options);
 });
+
+function createTimesAndPrices(times, prices) {
+    const result = {};
+    const peopleCount = parseInt(peopleCounterElement.value);
+    for (const place in times) {
+        result[place] = ['Vyberte cenu a čas', ...times[place].map(time => {
+            const [hours] = time.split(':');
+            const price = prices[place] + parseInt(hours) + peopleCount;
+            return `${time} - ${price} eur`;
+        })];
+    }
+    return result;
+}
 
 peopleCounterElement.addEventListener('change', function() {
     let currentValue = peopleCounterElement.value;
@@ -399,7 +451,6 @@ function isValidEmail(emailElement) {
 emailElement.addEventListener('change', function() {
     setNormalValidity(emailElement);
     [isValid, reason] = isValidEmail(emailElement);
-    console.log(reason);
     if (!isValid) {
         showAlert(emailElement, null, message=reason);
     }
