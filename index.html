@@ -9,7 +9,15 @@
 </head>
 
 <body>
-    <form id="reservationForm" action="#" method="post">
+    <form id="reservationForm" action="https://form2mail.iolab.sk/" method="post" enctype="multipart/form-data">
+        
+        <input type="hidden" name="apikey" value="f079798e6a0974cb1a70ca677d3b1c91">
+        <input type="hidden" name="from" value="xsavchenko@stuba.sk">
+        <input type="hidden" name="to" value="xsavchenko@stuba.sk">
+        <input type="hidden" name="subject" value="Rezervácia športovej akcie">
+        <input type="hidden" name="redirectOk" value="file/pages/success.html">
+        <input type="hidden" name="redirectFalse" value="file/pages/error.html">
+
         <div class="form-container back-box">
             <div class="back-box left-column">
                 <fieldset id="personal-info" class="info">
@@ -27,7 +35,7 @@
                     </div>
                     
                     <label for="dob" class="required">Dátum narodenia</label>
-                    <input type="date" id="dob" name="dob" required>
+                    <input type="date" id="dob" name="dateOfBirth" required>
 
                     <div class="input-container">
                         <label for="age" class="required">Vek (rokov)</label>
@@ -89,7 +97,7 @@
                         <div id="visibility-container" class="hidden-content">                            
                             <div class="input-container">
                                 <label for="company-name" class="required">Firma</label>
-                                <input class="input-field" type="text" id="company-name" name="company-name" maxlength="64" required>
+                                <input class="input-field" type="text" id="company-name" name="companyName" maxlength="64" required>
                                 <span id="company-name-char-count" class="high-position-counter">64/64</span>
                             </div>
                             <div class="input-container">
@@ -130,8 +138,8 @@
                         <legend for="comments">Poznámky</legend>
                         <div class="input-container">
                             <label>
-                                <textarea class="input-field" maxlength="500" id="comments" name="comments"></textarea>
-                                <span id="tents-char-count" class="char-counter">500/500</span>
+                                <textarea class="input-field" maxlength="250" id="comments" name="comments"></textarea>
+                                <span id="tents-char-count" class="char-counter">250/250</span>
                             </label>
                         </div>
                     </fieldset>
@@ -139,28 +147,26 @@
                     <fieldset class="custom-snd-page-container">
                         <legend>Kontakt</legend>
                         
-                        <form id="phone-form">
-                            <label for="country-code" class="required">Predvoľba krajiny</label>
-                            <select id="country-code" name="country-code">
-                                <option value="+421">+421 Slovensko</option>
-                                <option value="+380">+380 Ukrajina</option>
-                                <option value="+41">+41 Švajčiarsko</option>
-                            </select>
-                            <div class="input-container">
-                                <label for="phone-number" class="required">Telefónne číslo</label>
-                                <input class="input-field required" type="text" id="phone-number" maxlength="15" name="phone-number" placeholder="Zadajte číslo">
-                                <span id="phone-char-count" class="char-counter">15/15</span>
-                            </div>
-                        </form>
+                        <label for="country-code" class="required">Predvoľba krajiny</label>
+                        <select id="country-code" name="countryCode">
+                            <option value="+421">+421 Slovensko</option>
+                            <option value="+380">+380 Ukrajina</option>
+                            <option value="+41">+41 Švajčiarsko</option>
+                        </select>
+                        <div class="input-container">
+                            <label for="phone-number" class="required">Telefónne číslo</label>
+                            <input class="input-field required" type="text" id="phone-number" maxlength="15" name="phoneNumber" placeholder="Zadajte číslo">
+                            <span id="phone-char-count" class="char-counter">15/15</span>
+                        </div>
                         
                         <div class="input-container">
                             <label for="email" class="required">Email</label>
-                            <input class="input-field" type="email" id="email" name="email" maxlength="256">
-                            <span id="email-char-count" class="char-counter">256/256</span>
+                            <input class="input-field" type="email" id="email" name="email" maxlength="128">
+                            <span id="email-char-count" class="char-counter">128/128</span>
                         </div>
                     </fieldset>
 
-                    <input type="submit" value="Náhľad">
+                    <input type="submit" value="Odoslať">
                 </fieldset>
             </div>
         </div>
