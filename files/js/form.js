@@ -33,7 +33,7 @@ const companyNameCharCount = document.getElementById('company-name-char-count');
 const modal = document.getElementById('orderPreviewModal');
 const closeModalButton = document.getElementById('closeModalButton');
 const finalSubmitButton = document.getElementById('finalSubmitButton');
-const previewButton = document.querySelector('#reservationForm input[type="submit"]');
+const previewButton = document.getElementById('previewButton');
 const previewLeftColumnContent = document.getElementById('left-column-content');
 const previewRightColumnContent = document.getElementById('right-column-content');
 
@@ -246,10 +246,10 @@ closeModalButton.addEventListener('click', function () {
     modal.style.display = 'none';
 });
 
-finalSubmitButton.addEventListener('click', function () {
-    modal.style.display = 'none';
-    document.getElementById('reservationForm').submit();
-});
+// finalSubmitButton.addEventListener('click', function () {
+//     modal.style.display = 'none';
+//     document.getElementById('reservationForm').submit();
+// });
 
 function addSelectElements(selectElement, options) {
     options.forEach(function(option) {
@@ -260,24 +260,54 @@ function addSelectElements(selectElement, options) {
     });
 }
 
-function showAlert(element, secondElement=null, message) {
-    element.setCustomValidity(message);
+function showAlert(element, secondElement = null, message) {
     element.reportValidity();
-    const errorStyle = "0.15rem solid red"
+    const errorStyle = "0.15rem solid red";
     element.style.border = errorStyle;
-    if (secondElement !== null)
+    if (secondElement !== null) {
         secondElement.style.border = errorStyle;
+    }
+
+    removeAlertDiv(element);
+
+    let alertDiv = document.createElement('div');
+    alertDiv.className = 'custom-alert';
+    alertDiv.textContent = message;
+    alertDiv.dataset.forElement = element.id;
+
+    const rect = element.getBoundingClientRect();
+    alertDiv.style.position = 'absolute';
+    alertDiv.style.left = `${rect.left + window.scrollX}px`;
+    alertDiv.style.top = `${rect.bottom + window.scrollY + 5}px`;
+    alertDiv.style.backgroundColor = '#f8d7da';
+    alertDiv.style.color = '#721c24';
+    alertDiv.style.padding = '0.75rem';
+    alertDiv.style.border = '0.05rem solid #f5c6cb';
+    alertDiv.style.borderRadius = '0.35rem';
+    alertDiv.style.zIndex = '1000';
+
+    document.body.appendChild(alertDiv);
 }
 
-function setNormalValidity(element, secondElement=null) {
+function setNormalValidity(element, secondElement = null) {
     if (element == null) {
         return;
     }
-    element.setCustomValidity('');
+
     const validStyle = "0.15rem solid green";
     element.style.border = validStyle;
-    if (secondElement != null)
+    if (secondElement != null) {
         secondElement.style.border = validStyle;
+    }
+
+    removeAlertDiv(element);
+}
+
+function removeAlertDiv(element) {
+    const alertDiv = document.querySelector(`.custom-alert[data-for-element="${element.id}"]`);
+    if (alertDiv) {
+        document.body.removeChild(alertDiv);
+    }
 }
 
 function checkAge(ageElement, dobElement, age) {
