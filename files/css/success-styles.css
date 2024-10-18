@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #e6ffee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.success-code {
+    font-size: 4em;
+    font-weight: bold;
+    color: #2d8659;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.success-code .checkmark {
+    color: #28a745;
+    font-size: 0.8em;
+}
+
+.success-message {
+    font-size: 1.5em;
+    margin: 1em 0;
+    color: #4d4d4d;
+}
+
+.back-button {
+    text-decoration: none;
+    background-color: #2d8659;
+    color: #fff;
+    padding: 0.5em 1em;
+    border-radius: 0.3em;
+    font-size: 1.4rem;
+}
+
+.back-button:hover {
+    background-color: #3b9f72;
+}

@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.error-code {
+    font-size: 6.3rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.error-code .exclamation {
+    color: red;
+    font-size: 4rem;
+}
+
+.error-message {
+    font-size: 1.95rem;
+    margin: 0.75rem 0;
+    color: #666;
+}
+
+.back-button {
+    text-decoration: none;
+    background-color: #333;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.38rem;
+    font-size: 1.4rem;
+}
+
+.back-button:hover {
+    background-color: #555;
+}
