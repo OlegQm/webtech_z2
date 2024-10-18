@@ -10,6 +10,7 @@ const peopleCounterElement = document.getElementById('quantity');
 const otherCheckbox = document.getElementById('other');
 const otherInput = document.getElementById('other-textarea');
 const paymentInput = document.getElementById('paymentYes');
+const notPaymentInput = document.getElementById('paymentNo');
 const paymentInputVisibContainer = document.getElementById('visibility-container');
 const emailElement= document.getElementById('email');
 const countryCodeElement= document.getElementById('country-code');
@@ -45,16 +46,17 @@ function checkNotEmptyElement(element) {
     return true;
 }
 
-function checkName(namePart) {
+function checkName(namePart, type) {
     setNormalValidity(namePart);
     if (!checkNotEmptyElement(namePart)) {
+        const nameInvaldMessage = type + " nemôže byť prázdne.";
+        showAlert(namePart, null, nameInvaldMessage);
         return false;
     }
     const namePartText = namePart.value;
     const nameRegex = /^[A-Z][a-zA-Z\s\-]*$/;
     if (!nameRegex.test(namePartText)) {
-        const nameInvaldMessage = "Názov môže obsahovať len písmená a symboly ' ', '-'" +
-                                "a každá časť názvu musí začínať veľkým písmenom.";
+        const nameInvaldMessage = "Názov môže obsahovať len písmená a symboly ' ', '-'";
         showAlert(namePart, null, nameInvaldMessage);
         return false;
     }
@@ -62,8 +64,8 @@ function checkName(namePart) {
 }
 
 function checkPersonalInfo() {
-    const isNameValid = checkName(nameInput);
-    const isSurnameValid = checkName(surnameInput);
+    const isNameValid = checkName(nameInput, "Meno");
+    const isSurnameValid = checkName(surnameInput, "Priezvisko");
     const isBirthDateAndAgeValid = checkDateAndAge(dobElement, inputAgeElement);
     return isNameValid && isSurnameValid && isBirthDateAndAgeValid;
 }
@@ -288,15 +290,21 @@ function showAlert(element, secondElement = null, message) {
     document.body.appendChild(alertDiv);
 }
 
-function setNormalValidity(element, secondElement = null) {
+function setNormalValidity(
+    element,
+    secondElement = null,
+    greenBorder = true
+) {
     if (element == null) {
         return;
     }
 
-    const validStyle = "0.15rem solid green";
-    element.style.border = validStyle;
-    if (secondElement != null) {
-        secondElement.style.border = validStyle;
+    if (greenBorder) {
+        const validStyle = "0.15rem solid green";
+        element.style.border = validStyle;
+        if (secondElement != null) {
+            secondElement.style.border = validStyle;
+        }
     }
 
     removeAlertDiv(element);
@@ -534,6 +542,50 @@ phoneNumberElement.addEventListener('change', function() {
     isValidPhoneNumber(phoneNumberElement.value);
 });
 
+nameInput.addEventListener('blur', function() {
+    checkName(nameInput, "Meno");
+});
+
+surnameInput.addEventListener('blur', function() {
+    checkName(surnameInput, "Priezvisko");
+});
+
+sportSelect.addEventListener('blur', function() {
+    const sportMessage = "Vyberte šport.";
+    checkSelected(sportSelect, sportMessage);
+});
+
+subSportSelect.addEventListener('blur', function() {
+    const subSportMessage = "Vyberte podkategóriu.";
+    checkSelected(subSportSelect, subSportMessage);
+});
+
+sportPlaceSelect.addEventListener('blur', function() {
+    const sportPlaceMessage = "Vyberte miesto.";
+    checkSelected(sportPlaceSelect, sportPlaceMessage);
+});
+
+sportTimesAndPrices.addEventListener('blur', function() {
+    const timeAndPriceMessage = "Vyberte cenu a čas.";
+    checkSelected(sportTimesAndPrices, timeAndPriceMessage);
+});
+
+companyNameElement.addEventListener('blur', function() {
+    checkNotEmptyElement(companyNameElement);
+});
+
+icoElement.addEventListener('blur', function() {
+    checkICO(icoElement);
+});
+
+dicElement.addEventListener('blur', function() {
+    checkDIC(dicElement);
+});
+
+otherCheckbox.addEventListener('change', function() {
+    handleOther();
+});
+
 function handleCreatorsName() {
     if (creatorsButtonElement.textContent === 'Zobraziť meno gladiátora') {
         creatorsButtonElement.textContent = 'Skryť meno gladiátora'
@@ -549,6 +601,20 @@ function charsCounter(element, charCountElement) {
     const currentLength = element.value.length;
     charCountElement.textContent = `${maxLength - currentLength}/${maxLength}`;
 }
+
+notPaymentInput.addEventListener('change', function() {
+    if(notPaymentInput.checked) {
+        setNormalValidity(companyNameElement, null, false);
+        setNormalValidity(icoElement, null, false);
+        setNormalValidity(dicElement, null, false);
+    }
+});
+
+paymentInput.addEventListener('change', function() {
+    if (otherCheckbox.checked) {
+        handleOtherInput();
+    }
+});
 
 nameInput.addEventListener('input',
     function() {
@@ -597,6 +663,22 @@ dicElement.addEventListener('input',
         charsCounter(dicElement, dicCharCount);
     }
 );
+
+function handleOtherInput() {
+    setNormalValidity(otherInput);
+    checkNotEmptyElement(otherInput);
+}
+
+otherInput.addEventListener('blur', function() {
+    handleOtherInput();
+});
+
+otherCheckbox.addEventListener('change', function() {
+    if (!otherCheckbox.checked) {
+        setNormalValidity(otherInput, null, false);
+        return;
+    }
+});
 
 companyNameElement.addEventListener('input',
     function() {
