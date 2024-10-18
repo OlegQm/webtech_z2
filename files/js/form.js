@@ -169,6 +169,7 @@ function checkPaymentAndOther() {
     }
     if (otherCheckbox.checked) {
         if (!otherInput.value) {
+            showAlert(otherInput, null, "Toto pole nemôže byť prázdne");
             isOtherValid = false;
         }
     }
@@ -332,6 +333,10 @@ function checkAge(ageElement, dobElement, age) {
             return false;
         }
     }
+    if (age < 6) {
+        showAlert(ageElement, dobElement, 'Osoba musí byť staršia ako 5 rokov.');
+        return false;
+    }
     setNormalValidity(ageElement);
     return true;
 }
@@ -492,7 +497,7 @@ function isValidEmail(emailElement) {
     return [true, reason];
 }
 
-emailElement.addEventListener('change', function() {
+emailElement.addEventListener('blur', function() {
     setNormalValidity(emailElement);
     [isValid, reason] = isValidEmail(emailElement);
     if (!isValid) {
@@ -538,7 +543,7 @@ function isValidPhoneNumber(phoneNumber) {
     return true;
 }
 
-phoneNumberElement.addEventListener('change', function() {
+phoneNumberElement.addEventListener('blur', function() {
     isValidPhoneNumber(phoneNumberElement.value);
 });
 
@@ -680,8 +685,6 @@ otherCheckbox.addEventListener('change', function() {
     }
 });
 
-companyNameElement.addEventListener('input',
-    function() {
-        charsCounter(companyNameElement, companyNameCharCount);
-    }
-);
+companyNameElement.addEventListener('input', function() {
+    charsCounter(companyNameElement, companyNameCharCount);
+});

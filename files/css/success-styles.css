@@ -44,3 +44,18 @@ body {
 .back-button:hover {
     background-color: #3b9f72;
 }
+
+
+@media (max-width: 768px) {
+    .success-code {
+        font-size: 3em;
+    }
+
+    .success-message {
+        font-size: 1.2em;
+    }
+
+    .back-button {
+        font-size: 1.2rem;
+    }
+}

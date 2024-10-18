@@ -43,3 +43,17 @@ body {
 .back-button:hover {
     background-color: #555;
 }
+
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 4.5rem;
+    }
+
+    .error-message {
+        font-size: 1.5rem;
+    }
+
+    .back-button {
+        font-size: 1.2rem;
+    }
+}
