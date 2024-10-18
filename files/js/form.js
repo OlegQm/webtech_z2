@@ -246,11 +246,6 @@ closeModalButton.addEventListener('click', function () {
     modal.style.display = 'none';
 });
 
-// finalSubmitButton.addEventListener('click', function () {
-//     modal.style.display = 'none';
-//     document.getElementById('reservationForm').submit();
-// });
-
 function addSelectElements(selectElement, options) {
     options.forEach(function(option) {
         const opt = document.createElement('option');
@@ -278,13 +273,17 @@ function showAlert(element, secondElement = null, message) {
     const rect = element.getBoundingClientRect();
     alertDiv.style.position = 'absolute';
     alertDiv.style.left = `${rect.left + window.scrollX}px`;
-    alertDiv.style.top = `${rect.bottom + window.scrollY + 5}px`;
+    alertDiv.style.top = `${rect.bottom + window.scrollY + 3}px`;
     alertDiv.style.backgroundColor = '#f8d7da';
     alertDiv.style.color = '#721c24';
     alertDiv.style.padding = '0.75rem';
     alertDiv.style.border = '0.05rem solid #f5c6cb';
     alertDiv.style.borderRadius = '0.35rem';
     alertDiv.style.zIndex = '1000';
+
+    if (window.innerWidth <= 768) {
+        alertDiv.style.width = '50%';
+    }
 
     document.body.appendChild(alertDiv);
 }
@@ -457,6 +456,11 @@ function isValidEmail(emailElement) {
         return [false, "Toto pole nemôže byť prázdne"];
     }
     const email = emailElement.value;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+        return [false, "Email musí obsahovať iba písmená, číslice, jeden znak '@' a jeden znak '.'"];
+    }
+
     const atSymbolIndex = email.indexOf('@');
     let reason = "";
     if (atSymbolIndex < 3) {

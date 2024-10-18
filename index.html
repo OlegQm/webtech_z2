@@ -19,33 +19,34 @@
         <input type="hidden" name="redirectOk" value="https://webte1.fei.stuba.sk/~xsavchenko/z2/files/pages/success.html">
         <input type="hidden" name="redirectFalse" value="https://webte1.fei.stuba.sk/~xsavchenko/z2/files/pages/error.html">
 
+        <h1 class="back-box form-header">Výber športu</h1>
         <div class="form-container back-box">
             <div class="back-box left-column">
                 <fieldset id="personal-info" class="info">
                     <legend>Osobné údaje</legend>
                     <div class="input-container">
                         <label for="name" class="required">Meno</label>
-                        <input class="input-field" type="text" id="name" name="name" maxlength="30">
+                        <input class="input-field" type="text" id="name" name="Meno" maxlength="30">
                         <span id="name-char-count" class="char-counter">30/30</span>
                     </div>
 
                     <div class="input-container">
                         <label for="surname" class="required">Priezvisko</label>
-                        <input class="input-field" type="text" id="surname" name="surname" maxlength="30">
+                        <input class="input-field" type="text" id="surname" name="Priezvisko" maxlength="30">
                         <span id="surname-char-count" class="char-counter">30/30</span>
                     </div>
-                    
+
                     <label for="dob" class="required">Dátum narodenia</label>
-                    <input type="date" id="dob" name="dateOfBirth">
+                    <input type="date" id="dob" name="Datum-narodenia">
 
                     <div class="input-container">
                         <label for="age" class="required">Vek (rokov)</label>
-                        <input class="input-field" type="text" id="age" name="age" maxlength="3">
+                        <input class="input-field" type="text" id="age" name="Vek" maxlength="3">
                         <span id="age-char-count" class="char-counter">3/3</span>
                     </div>
                     
                     <label for="gender" class="required">Pohlavie</label>
-                    <select class="input-field" id="gender" name="gender">
+                    <select class="input-field" id="gender" name="Pohlavie">
                         <option value="M">Muž</option>
                         <option value="F">Žena</option>
                     </select>
@@ -55,23 +56,23 @@
                     <legend>Registrácia</legend>
                     
                     <label for="quantity" class="required">Zadajte počet ľudí</label>
-                    <input type="number" id="quantity" name="quantity" min="2" max="10" step="2" value="2">
+                    <input type="number" id="quantity" name="Pocet-ludi" min="2" max="10" step="2" value="2">
 
                     <label for="sport" class="required">Typ športovej akcie</label>
-                    <select id="sport" name="sport" class="input-field">
+                    <select id="sport" name="Sport" class="input-field">
                         <option value="">Vyberte šport</option>
                         <option value="futbal">Futbal</option>
                         <option value="tenis">Tenis</option>
                     </select>
 
                     <label for="subSport" class="required">Podkategória</label>
-                    <select id="subSport" name="subSport" class="input-field"></select>
+                    <select id="subSport" name="Podkategoria" class="input-field"></select>
 
                     <label for="sportPlace" class="required">Miesto</label>
-                    <select id="sportPlace" name="sportPlace" class="input-field"></select>
+                    <select id="sportPlace" name="Miesto" class="input-field"></select>
 
                     <label for="timeAndPrice" class="required">Cena a čas</label>
-                    <select id="timeAndPrice" name="timeAndPrice" class="input-field"></select>
+                    <select id="timeAndPrice" name="Cena-a-cas" class="input-field"></select>
                 </fieldset>
 
                 <fieldset  class="info">
@@ -88,58 +89,58 @@
                     <fieldset class="radio-group custom-snd-page-container">
                         <legend for="paymentOption">Platba na faktúru?</legend>
                         <label class="custom-radiobtn-checkbox">
-                            <input class="radio-mark" type="radio" name="payment" value="yes" id="paymentYes" onclick="handleFacturePayment()">
+                            <input class="radio-mark" type="radio" name="Platba-na-fakturu" value="yes" id="paymentYes" onclick="handleFacturePayment()">
                             <span for="paymentYes">Áno</span>
                         </label>
                         <label class="custom-radiobtn-checkbox">
-                            <input class="radio-mark" type="radio" name="payment" value="no" id="paymentNo" onclick="handleFacturePayment()" checked>
+                            <input class="radio-mark" type="radio" name="Platba-na-fakturu" value="no" id="paymentNo" onclick="handleFacturePayment()" checked>
                             <span for="paymentNo">Nie</span>
                         </label>
                         <div id="visibility-container" class="hidden-content">                            
                             <div class="input-container">
                                 <label for="company-name" class="required">Firma</label>
-                                <input class="input-field" type="text" id="company-name" name="companyName" maxlength="64">
+                                <input class="input-field" type="text" id="company-name" name="Firma" maxlength="64">
                                 <span id="company-name-char-count" class="high-position-counter">64/64</span>
                             </div>
                             <div class="input-container">
                                 <label for="ico" class="required">IČO</label>
-                                <input class="input-field" type="text" id="ico" name="ico" maxlength="8">
+                                <input class="input-field" type="text" id="ico" name="ICO" maxlength="8">
                                 <span id="ico-char-count" class="high-position-counter">8/8</span>
                             </div>
                             <div class="input-container">
                                 <label for="dic" class="required">DIČ</label>
-                                <input class="input-field" type="text" id="dic" name="dic" maxlength="10">
+                                <input class="input-field" type="text" id="dic" name="DIC" maxlength="10">
                                 <span id="dic-char-count" class="high-position-counter">10/10</span>
                             </div>
                         </div>
                     </fieldset>
 
                     <fieldset class="checkbox-group custom-snd-page-container">
-                        <legend for="sports">Ďalšie športové potreby</legend>
+                        <legend for="Dalsie-sportove-potreby">Ďalšie športové potreby</legend>
                         <label class="custom-radiobtn-checkbox">
-                            <input type="checkbox" name="sports" id="shoes">
+                            <input type="checkbox" name="Tenisky" id="shoes">
                             <span class="checkbox-mark"></span>Tenisky
                         </label>
                         <label class="custom-radiobtn-checkbox">
-                            <input type="checkbox" name="sports" id="t-shirt">
+                            <input type="checkbox" name="Tricko" id="t-shirt">
                             <span class="checkbox-mark"></span>Tričko
                         </label>
                         <label class="custom-radiobtn-checkbox">
-                            <input type="checkbox" name="sports" id="beer">
+                            <input type="checkbox" name="Pivo" id="beer">
                             <span class="checkbox-mark"></span>Pivo
                         </label>
                         <label class="custom-radiobtn-checkbox">
-                            <input type="checkbox" name="sports" id="other" onclick="handleOther()">
+                            <input type="checkbox" name="Ine" id="other" onclick="handleOther()">
                             <span class="checkbox-mark"></span>Iné
                         </label>
-                        <textarea name="other" id="other-textarea" class="hidden-content"></textarea>
+                        <textarea name="Obsah-ineho" id="other-textarea" class="hidden-content"></textarea>
                     </fieldset>
                     
                     <fieldset class="custom-snd-page-container">
                         <legend for="comments">Poznámky</legend>
                         <div class="input-container">
                             <label>
-                                <textarea class="input-field" maxlength="250" id="comments" name="comments"></textarea>
+                                <textarea class="input-field" maxlength="250" id="comments" name="Poznamky"></textarea>
                                 <span id="tents-char-count" class="char-counter">250/250</span>
                             </label>
                         </div>
@@ -150,7 +151,7 @@
                         <div class="phone-input-container">
                             <div class="input-container country-code-container">
                                 <label for="country-code" class="required">Krajina</label>
-                                <select id="country-code" name="countryCode">
+                                <select id="country-code" name="Kod-krajiny">
                                     <option value="+421">+421 Slovensko</option>
                                     <option value="+380">+380 Ukrajina</option>
                                     <option value="+41">+41 Švajčiarsko</option>
@@ -158,14 +159,14 @@
                             </div>
                             <div class="input-container">
                                 <label for="phone-number" class="required">Telefónne číslo</label>
-                                <input class="input-field required" type="text" id="phone-number" maxlength="15" name="phoneNumber" placeholder="Zadajte číslo">
+                                <input class="input-field required" type="text" id="phone-number" maxlength="15" name="Telefonne-cislo" placeholder="Zadajte číslo">
                                 <span id="phone-char-count" class="char-counter">15/15</span>
                             </div>
                         </div>
 
                         <div class="input-container">
                             <label for="email" class="required">Email</label>
-                            <input class="input-field" type="email" id="email" name="email" maxlength="128">
+                            <input class="input-field" type="email" id="email" name="Email" maxlength="128">
                             <span id="email-char-count" class="char-counter">128/128</span>
                         </div>
                     </fieldset>
